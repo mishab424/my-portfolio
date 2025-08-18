@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammed Mishab - Oracle PL/SQL Developer | Lead Technical Consultant</title>
+    <meta name="description" content="Oracle APEX Certified Developer specializing in banking domain solutions, PL/SQL development, and AI-powered innovations">
+    <meta name="keywords" content="Oracle PL/SQL Developer, APEX Plugins, Banking Domain Specialist, Technical Consultant">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0D47A1;
+            --accent-teal: #26A69A;
+            --white: #FFFFFF;
+            --soft-gray: #F5F5F5;
+            --dark-gray: #333333;
+            --light-gray: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-teal);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.9), rgba(38, 166, 154, 0.8)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f0f8ff" width="1200" height="800"/><g fill="%23e6f3ff"><circle cx="200" cy="150" r="80"/><circle cx="800" cy="200" r="60"/><circle cx="1000" cy="400" r="100"/><circle cx="300" cy="600" r="70"/></g><g fill="%23d1e9ff"><rect x="100" y="300" width="150" height="100" rx="10"/><rect x="600" y="500" width="200" height="80" rx="8"/><rect x="900" y="100" width="120" height="120" rx="12"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-teal);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e8e7e;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--soft-gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            font-weight: 700;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlights {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .highlight {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .highlight i {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Resume Section */
+        .resume-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .timeline-date {
+            background: var(--accent-teal);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .timeline-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Plugins Section */
+        .plugins {
+            background: var(--soft-gray);
+        }
+
+        .plugins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .plugin-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .plugin-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .plugin-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .plugin-icon.chatbot { background: linear-gradient(135deg, #4CAF50, #45a049); }
+        .plugin-icon.esign { background: linear-gradient(135deg, #FF9800, #f57c00); }
+        .plugin-icon.invoice { background: linear-gradient(135deg, #2196F3, #1976d2); }
+        .plugin-icon.dashboard { background: linear-gradient(135deg, #9C27B0, #7b1fa2); }
+
+        .plugin-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .plugin-version {
+            background: var(--light-gray);
+            color: var(--dark-gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .plugin-price {
+            display: none;
+        }
+
+        .btn-buy {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-buy:hover {
+            background: #0a3d91;
+            transform: translateY(-2px);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--soft-gray);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+        }
+
+        .contact-info {
+            padding: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+            width: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-teal);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 1rem;
+            color: #ccc;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .highlights {
+                justify-content: center;
+            }
+
+            .plugins-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">MM</div>
+                Mishab
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#plugins">Plugins</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Muhammed Mishab</h1>
+            <p>Oracle PL/SQL Developer | Lead Technical Consultant | Banking Domain Specialist</p>
+            <p>Building scalable banking-grade solutions with Oracle APEX, SQL, and AI-powered innovations</p>
+            <div class="cta-buttons">
+                <a href="#plugins" class="btn btn-primary">Explore My Work</a>
+                <a href="#contact" class="btn btn-secondary">Hire Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="profile-img">MM</div>
+                <div class="about-text">
+                    <h3>Professional Summary</h3>
+                    <p>Experienced Oracle PL/SQL Developer and Lead Technical Consultant with 3+ years of expertise in banking domain solutions. Specialized in Oracle APEX development, database optimization, and AI-powered business intelligence.</p>
+                    <p>Passionate about creating scalable, secure, and user-friendly applications that drive business growth and operational efficiency.</p>
+                    <div class="highlights">
+                        <div class="highlight">
+                            <i class="fas fa-award"></i>
+                            <h4>3+ Years</h4>
+                            <p>Experience</p>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-certificate"></i>
+                            <h4>Oracle APEX</h4>
+                            <p>Certified</p>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-university"></i>
+                            <h4>Banking</h4>
+                            <p>Domain Expert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="container">
+            <h2 class="section-title">Resume</h2>
+            <div class="resume-timeline">
+                <div class="timeline-item" onclick="toggleTimeline(this)">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Lead Technical Consultant - Banking Solutions</div>
+                        <div class="timeline-date">2022 - Present</div>
+                    </div>
+                    <div class="timeline-content">
+                        <p><strong>Company:</strong> Tech Solutions Ltd.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul>
+                            <li>Led development of core banking applications using Oracle APEX</li>
+                            <li>Designed and implemented PL/SQL procedures for transaction processing</li>
+                            <li>Mentored junior developers and conducted code reviews</li>
+                            <li>Collaborated with business analysts to gather requirements</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(this)">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Oracle PL/SQL Developer</div>
+                        <div class="timeline-date">2021 - 2022</div>
+                    </div>
+                    <div class="timeline-content">
+                        <p><strong>Company:</strong> Financial Systems Inc.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul>
+                            <li>Developed and maintained banking database systems</li>
+                            <li>Created automated reporting solutions</li>
+                            <li>Optimized database performance and query execution</li>
+                            <li>Implemented security measures for sensitive financial data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(this)">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Education - B.Tech Computer Science</div>
+                        <div class="timeline-date">2017 - 2021</div>
+                    </div>
+                    <div class="timeline-content">
+                        <p><strong>University:</strong> Kerala Technological University</p>
+                        <p><strong>CGPA:</strong> 8.5/10</p>
+                        <p><strong>Key Projects:</strong></p>
+                        <ul>
+                            <li>Banking Management System using Oracle Database</li>
+                            <li>AI-powered Chatbot for Customer Service</li>
+                            <li>Web-based Invoice Generation System</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(this)">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Certifications & Open Source</div>
+                        <div class="timeline-date">2021 - Present</div>
+                    </div>
+                    <div class="timeline-content">
+                        <p><strong>Certifications:</strong></p>
+                        <ul>
+                            <li>Oracle APEX Application Development</li>
+                            <li>Oracle Database SQL Certified Associate</li>
+                            <li>Oracle PL/SQL Developer Certified Associate</li>
+                        </ul>
+                        <p><strong>Open Source Contributions:</strong></p>
+                        <ul>
+                            <li>APEX Plugin Library - 5+ plugins published</li>
+                            <li>Banking Utils - PL/SQL utility package</li>
+                            <li>Documentation and tutorials on Oracle community</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="downloadResume()">
+                    <i class="fas fa-download"></i> Download Resume PDF
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plugins Section -->
+    <section id="plugins" class="section plugins">
+        <div class="container">
+            <h2 class="section-title">💡 My Plugins</h2>
+            <div class="plugins-grid">
+                <div class="plugin-card">
+                    <div class="plugin-icon chatbot">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="plugin-title">MC Chatbot</h3>
+                    <span class="plugin-version">v1.0</span>
+                    <p>AI-powered chatbot plugin for Oracle APEX applications. Enhance user engagement with intelligent conversational interfaces.</p>
+                    <div class="plugin-price">$49</div>
+                    <button class="btn-buy" onclick="openBuyModal('MC Chatbot', '')">Get Quote</button>
+                </div>
+
+                <div class="plugin-card">
+                    <div class="plugin-icon chatbot">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="plugin-title">MC Chatbot PRO</h3>
+                    <span class="plugin-version">v2.0</span>
+                    <p>Advanced chatbot with Natural Language Processing, sentiment analysis, and machine learning capabilities.</p>
+                    <div class="plugin-price">$99</div>
+                    <button class="btn-buy" onclick="openBuyModal('MC Chatbot PRO', '')">Get Quote</button>
+                </div>
+
+                <div class="plugin-card">
+                    <div class="plugin-icon esign">
+                        <i class="fas fa-signature"></i>
+                    </div>
+                    <h3 class="plugin-title">eSignDoc V1</h3>
+                    <span class="plugin-version">v1.0</span>
+                    <p>Basic digital document signing solution for APEX. Secure, legally compliant electronic signatures.</p>
+                    <div class="plugin-price">$79</div>
+                    <button class="btn-buy" onclick="openBuyModal('eSignDoc V1', '')">Get Quote</button>
+                </div>
+
+                <div class="plugin-card">
+                    <div class="plugin-icon esign">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3 class="plugin-title">eSignDoc V2</h3>
+                    <span class="plugin-version">v2.0</span>
+                    <p>Advanced e-signature plugin with comprehensive audit trail, multi-party signing, and compliance features.</p>
+                    <div class="plugin-price">$149</div>
+                    <button class="btn-buy" onclick="openBuyModal('eSignDoc V2', '')">Get Quote</button>
+                </div>
+
+                <div class="plugin-card">
+                    <div class="plugin-icon invoice">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <h3 class="plugin-title">Invoice Generator</h3>
+                    <span class="plugin-version">v1.5</span>
+                    <p>Automated invoice creation and management system for Oracle APEX. Generate professional invoices with ease.</p>
+                    <div class="plugin-price">$69</div>
+                    <button class="btn-buy" onclick="openBuyModal('Invoice Generator', '')">Get Quote</button>
+                </div>
+
+                <div class="plugin-card">
+                    <div class="plugin-icon dashboard">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="plugin-title">Dashboard Template</h3>
+                    <span class="plugin-version">v1.0</span>
+                    <p>Prebuilt responsive dashboard template for Oracle APEX with modern UI components and analytics widgets.</p>
+                    <div class="plugin-price">$89</div>
+                    <button class="btn-buy" onclick="openBuyModal('Dashboard Template', '')">Get Quote</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">💼 Services Offered</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="showServiceDetails('apex')">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="service-title">Oracle APEX Development</h3>
+                    <p>Complete APEX application development from concept to deployment. Custom solutions tailored to your business needs.</p>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetails('ui')">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="service-title">UI/UX Design</h3>
+                    <p>Modern, responsive user interface design with focus on user experience and accessibility standards.</p>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetails('web')">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="service-title">Web Development</h3>
+                    <p>Full-stack web development with Oracle backend integration. Scalable and secure web applications.</p>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetails('backend')">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="service-title">Backend Services</h3>
+                    <p>PL/SQL development, API creation, database optimization, and performance tuning services.</p>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetails('ml')">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="service-title">Oracle Machine Learning</h3>
+                    <p>Predictive analytics dashboards, OML notebooks, and AI-powered business intelligence solutions.</p>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetails('consulting')">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="service-title">Technical Consulting</h3>
+                    <p>Expert consultation on Oracle technologies, architecture design, and best practices implementation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <h3>Send Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            mishabpoomala424@gmail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>WhatsApp</strong><br>
+                            <a href="https://wa.me/919745795598" target="_blank" style="color: var(--accent-teal); text-decoration: none;">+91 97457 95598</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Location</strong><br>
+                            Kozhikode, Kerala, India
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-briefcase"></i>
+                        <div>
+                            <strong>Specialization</strong><br>
+                            Oracle APEX & Banking Solutions
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/muhammed-mishab-pp-" target="_blank" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/mishab42" target="_blank" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://wa.me/919745795598" target="_blank" class="social-link" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:mishabpoomala424@gmail.com" class="social-link" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#plugins">Plugins</a>
+                    <a href="#services">Services</a>
+                    <a href="#resume">Resume</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <a href="#services">Oracle APEX Development</a>
+                    <a href="#services">UI/UX Design</a>
+                    <a href="#services">Web Development</a>
+                    <a href="#services">Technical Consulting</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Technologies</h4>
+                    <a href="#">Oracle APEX</a>
+                    <a href="#">PL/SQL</a>
+                    <a href="#">Oracle Database</a>
+                    <a href="#">Machine Learning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Muhammed Mishab. All rights reserved.</p>
+                <p>Built with HTML, CSS, JavaScript | Powered by Oracle & APEX</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Buy Modal -->
+    <div id="buyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBuyModal()">&times;</span>
+            <h2>Request Quote</h2>
+            <form id="buyForm">
+                <div class="form-group">
+                    <label for="buyName">Full Name</label>
+                    <input type="text" id="buyName" name="buyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyEmail">Email Address</label>
+                    <input type="email" id="buyEmail" name="buyEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyPhone">Contact Number</label>
+                    <input type="tel" id="buyPhone" name="buyPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="selectedPlugin">Selected Plugin</label>
+                    <input type="text" id="selectedPlugin" name="selectedPlugin" readonly>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Quote Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("-M4IUrrG873E3sU-B"); // Your EmailJS public key
+        })();
+
+
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Timeline toggle functionality
+        function toggleTimeline(element) {
+            const content = element.querySelector('.timeline-content');
+            const isActive = content.classList.contains('active');
+            
+            // Close all other timeline items
+            document.querySelectorAll('.timeline-content').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                content.classList.add('active');
+            }
+        }
+
+        // Buy modal functionality
+        function openBuyModal(pluginName, price) {
+            document.getElementById('selectedPlugin').value = pluginName;
+            document.getElementById('buyModal').style.display = 'block';
+        }
+
+        function closeBuyModal() {
+            document.getElementById('buyModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('buyModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Resume download from Dropbox
+        function downloadResume() {
+            // Convert Dropbox share link to direct download link
+            const dropboxUrl = 'https://www.dropbox.com/scl/fi/m0de8o9l0xsg3p54g3uyc/muhammed-mishab-lead-technical-consultant.pdf?rlkey=8p69xejykzwaw0giipjwrzj4m&st=v7cbgem1&dl=1';
+            
+            // Create a temporary link element and trigger download
+            const link = document.createElement('a');
+            link.href = dropboxUrl;
+            link.download = 'Muhammed_Mishab_Resume.pdf';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Buy form submission with EmailJS
+        document.getElementById('buyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            // Debug: Log form data
+            console.log('Form data:', {
+                name: formData.get('buyName'),
+                email: formData.get('buyEmail'),
+                phone: formData.get('buyPhone'),
+                plugin: formData.get('selectedPlugin')
+            });
+            
+            const templateParams = {
+                user_name: formData.get('buyName'),
+                user_email: formData.get('buyEmail'),
+                user_phone: formData.get('buyPhone'),
+                plugin_name: formData.get('selectedPlugin'),
+                message: `Plugin Quote Request\n\nCustomer: ${formData.get('buyName')}\nEmail: ${formData.get('buyEmail')}\nPhone: ${formData.get('buyPhone')}\nPlugin: ${formData.get('selectedPlugin')}\n\nPlease contact the customer with pricing details and plugin information.`
+            };
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS with detailed logging
+            console.log('Sending email with params:', templateParams);
+            
+            emailjs.send('service_0dqlkug', 'template_r7n2cej', templateParams)
+                .then(function(response) {
+                    console.log('EmailJS SUCCESS!', response.status, response.text);
+                    alert('Thanks for your quote request! I\'ll contact you shortly with pricing details and plugin information.');
+                    closeBuyModal();
+                    document.getElementById('buyForm').reset();
+                })
+                .catch(function(error) {
+                    console.error('EmailJS FAILED:', error);
+                    console.error('Error status:', error.status);
+                    console.error('Error text:', error.text);
+                    
+                    // Show specific error message
+                    if (error.status === 400) {
+                        alert('There was an issue with the email configuration. Please contact me directly at mishabpoomala424@gmail.com');
+                    } else if (error.status === 401) {
+                        alert('Email service authentication failed. Please contact me directly at mishabpoomala424@gmail.com');
+                    } else {
+                        alert('Sorry, there was an error sending your request. Please contact me directly at mishabpoomala424@gmail.com');
+                    }
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Contact form submission with EmailJS
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            // Debug: Log form data
+            console.log('Contact form data:', {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            });
+            
+            const templateParams = {
+                user_name: formData.get('name'),
+                user_email: formData.get('email'),
+                message: `Contact Form Message\n\nFrom: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\nMessage:\n${formData.get('message')}`
+            };
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS with detailed logging
+            console.log('Sending contact email with params:', templateParams);
+            
+            emailjs.send('service_0dqlkug', 'template_r7n2cej', templateParams)
+                .then(function(response) {
+                    console.log('EmailJS SUCCESS!', response.status, response.text);
+                    alert('Thank you for your message! I\'ll get back to you soon.');
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function(error) {
+                    console.error('EmailJS FAILED:', error);
+                    console.error('Error status:', error.status);
+                    console.error('Error text:', error.text);
+                    
+                    // Show specific error message
+                    if (error.status === 400) {
+                        alert('There was an issue with the email configuration. Please contact me directly at mishabpoomala424@gmail.com');
+                    } else if (error.status === 401) {
+                        alert('Email service authentication failed. Please contact me directly at mishabpoomala424@gmail.com');
+                    } else {
+                        alert('Sorry, there was an error sending your message. Please contact me directly at mishabpoomala424@gmail.com');
+                    }
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Service details functionality
+        function showServiceDetails(service) {
+            const services = {
+                apex: 'Oracle APEX Development: Complete application development lifecycle from requirements gathering to deployment. Custom plugins, themes, and integrations.',
+                ui: 'UI/UX Design: Modern, responsive designs with focus on user experience. Wireframing, prototyping, and usability testing.',
+                web: 'Web Development: Full-stack development with Oracle backend. Modern frameworks and responsive design.',
+                backend: 'Backend Services: PL/SQL procedures, functions, packages. API development and database optimization.',
+                ml: 'Oracle Machine Learning: Predictive analytics, data mining, and AI-powered insights using Oracle ML.',
+                consulting: 'Technical Consulting: Architecture review, performance optimization, and best practices implementation.'
+            };
+            
+            alert(services[service] || 'Service details coming soon!');
+        }
+
+
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.plugin-card, .service-card, .timeline-item');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Mobile menu toggle (basic implementation)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970f59f677364226',t:'MTc1NTQ5ODUxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
